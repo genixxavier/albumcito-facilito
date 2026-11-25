@@ -1,0 +1,12 @@
+- generic [active] [ref=f2e1]:
+  - button "Open Next.js Dev Tools" [ref=f2e19] [cursor=pointer]
+  - alert [ref=f2e23]: Albumcito Facilito
+  - main [ref=f2e97]:
+    - heading "Hola, Pedro Omite" [level=1] [ref=f2e98]
+    - paragraph [ref=f2e99]: pedro@example.com
+    - heading "Mi colección" [level=2] [ref=f2e100]
+    - paragraph [ref=f2e101]: Aún no tienes estampas.
+    - generic [ref=f2e102]:
+      - link "Ver álbumes" [ref=f2e103] [cursor=pointer]:
+        - /url: /
+      - button "Cerrar sesión" [ref=f2e105]

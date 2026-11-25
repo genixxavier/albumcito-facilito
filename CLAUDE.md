@@ -35,7 +35,9 @@ Cada componente tiene su propio `CLAUDE.md` con comandos y convenciones; consúl
 - La API es la fuente de verdad del estado de la colección; el frontend no persiste datos propios más allá de caché/UI.
 - Conceptos de dominio compartidos: **álbum**, **estampa**, **usuario**, **colección** (estampas que un usuario posee).
 - Protocolo REST/JSON. URL base de la API: `API_URL` (app, solo servidor).
-- Auth: `POST /auth/signup` (name, email, password), `POST /auth/login`, `GET /auth/me` (Bearer). La API firma un JWT (1h, `JWT_SECRET` obligatorio); el frontend lo guarda en cookie httpOnly `session` mediante Server Actions. Tras login/signup se redirige a `/<username>` (slug único derivado del nombre).
+- Auth: `POST /auth/signup` (name, email, password), `POST /auth/login`, `GET /auth/me` (Bearer). La API firma un JWT (1h, `JWT_SECRET` obligatorio); el frontend lo guarda en cookie httpOnly `session` mediante Server Actions. Tras login se redirige a `/<username>` (slug único derivado del nombre); tras signup, a `/onboarding`.
+- Onboarding: `User.onboarding` es `null` (cuenta previa) → `false` al crear la cuenta → `true` al añadir la primera estampa; `GET /auth/me` lo expone. Colección (Bearer): `GET /collection` y `POST /collection/stickers` `{ stickerId }` (idempotente, 200; 404 si no existe). La primera estampa emite el evento `onboarding.completed` `{ userId, accountCreatedAt, firstStickerAt, durationMs }`, registrado como log JSON. Spec en `specs/onboarding-first-sticker/`.
+- Likes y rankings (home): `PUT`/`DELETE /albums/:id/like` (Bearer) y `GET /likes` (Bearer, `{ albumIds }`); públicos `GET /albums/top` y `GET /stickers/top` (`?limit=` 1–20, por defecto 5). `AlbumSummary` incluye `likeCount`. Specs en `openspec/specs/album-likes/` y `openspec/specs/home-highlights/`.
 
 ## Estructura del repositorio
 

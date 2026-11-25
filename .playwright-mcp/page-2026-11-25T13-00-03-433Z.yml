@@ -1,0 +1,65 @@
+- generic [active] [ref=f3e1]:
+  - main [ref=f3e2]:
+    - heading "Elige tu primera estampa" [level=1] [ref=f3e3]
+    - paragraph [ref=f3e4]: "Empieza tu colección: toca una estampa de Cody para añadirla a tu álbum."
+    - region "Las aventuras de Cody" [ref=f3e5]:
+      - heading "Las aventuras de Cody" [level=2] [ref=f3e6]
+      - list [ref=f3e7]:
+        - listitem [ref=f3e8]:
+          - button "Añadir Cody despierta" [ref=f3e10]:
+            - generic [ref=f3e11]: "#1"
+            - generic [ref=f3e12]: Cody despierta
+        - listitem [ref=f3e13]:
+          - button "Añadir Cody y su primera línea de código" [ref=f3e15]:
+            - generic [ref=f3e16]: "#2"
+            - generic [ref=f3e17]: Cody y su primera línea de código
+        - listitem [ref=f3e18]:
+          - button "Añadir Cody encuentra un bug" [ref=f3e20]:
+            - generic [ref=f3e21]: "#3"
+            - generic [ref=f3e22]: Cody encuentra un bug
+        - listitem [ref=f3e23]:
+          - button "Añadir Cody celebra" [ref=f3e25]:
+            - generic [ref=f3e26]: "#4"
+            - generic [ref=f3e27]: Cody celebra
+    - region "Cody en el espacio" [ref=f3e28]:
+      - heading "Cody en el espacio" [level=2] [ref=f3e29]
+      - list [ref=f3e30]:
+        - listitem [ref=f3e31]:
+          - button "Añadir Cody astronauta" [ref=f3e33]:
+            - generic [ref=f3e34]: "#1"
+            - generic [ref=f3e35]: Cody astronauta
+        - listitem [ref=f3e36]:
+          - button "Añadir Cohete de Cody" [ref=f3e38]:
+            - generic [ref=f3e39]: "#2"
+            - generic [ref=f3e40]: Cohete de Cody
+        - listitem [ref=f3e41]:
+          - button "Añadir Cody en la Luna" [ref=f3e43]:
+            - generic [ref=f3e44]: "#3"
+            - generic [ref=f3e45]: Cody en la Luna
+    - region "Cody programador" [ref=f3e46]:
+      - heading "Cody programador" [level=2] [ref=f3e47]
+      - list [ref=f3e48]:
+        - listitem [ref=f3e49]:
+          - button "Añadir Cody y la terminal" [ref=f3e51]:
+            - generic [ref=f3e52]: "#1"
+            - generic [ref=f3e53]: Cody y la terminal
+        - listitem [ref=f3e54]:
+          - button "Añadir Cody y el editor" [ref=f3e56]:
+            - generic [ref=f3e57]: "#2"
+            - generic [ref=f3e58]: Cody y el editor
+        - listitem [ref=f3e59]:
+          - button "Añadir Cody y Git" [ref=f3e61]:
+            - generic [ref=f3e62]: "#3"
+            - generic [ref=f3e63]: Cody y Git
+        - listitem [ref=f3e64]:
+          - button "Añadir Cody y los tests probados" [ref=f3e66]:
+            - generic [ref=f3e67]: "#4"
+            - generic [ref=f3e68]: Cody y los tests probados
+        - listitem [ref=f3e69]:
+          - button "Añadir Cody despliega" [ref=f3e71]:
+            - generic [ref=f3e72]: "#5"
+            - generic [ref=f3e73]: Cody despliega
+    - link "Omitir por ahora" [ref=f3e74] [cursor=pointer]:
+      - /url: /pedro-omite
+  - button "Open Next.js Dev Tools" [ref=f3e80] [cursor=pointer]
+  - alert [ref=f3e84]

@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 import DashboardPage from "@/app/[username]/page";
 import LoginPage from "@/app/login/page";
 import SignupPage from "@/app/signup/page";
-import { getMe } from "@/lib/api";
+import { getCollection, getMe } from "@/lib/api";
 import { getSession } from "@/lib/session";
 
-vi.mock("@/lib/api", () => ({ getMe: vi.fn() }));
+vi.mock("@/lib/api", () => ({ getMe: vi.fn(), getCollection: vi.fn() }));
 vi.mock("@/lib/session", () => ({ getSession: vi.fn() }));
 vi.mock("@/app/actions", () => ({
   loginAction: vi.fn(),
@@ -28,6 +28,8 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
   BeforeEachScenario(() => {
     redirected = undefined;
     vi.mocked(getMe).mockReset();
+    vi.mocked(getCollection).mockReset();
+    vi.mocked(getCollection).mockResolvedValue({ ok: true, data: { stickers: [] } });
     vi.mocked(getSession).mockReset();
   });
   AfterEachScenario(() => {
@@ -71,12 +73,46 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       "una sesión válida del usuario {string} con username {string}",
       (_ctx, name: string, username: string) => {
         vi.mocked(getSession).mockResolvedValue("token");
-        vi.mocked(getMe).mockResolvedValue({ id: "1", name, email: "a@b.c", username });
+        vi.mocked(getMe).mockResolvedValue({
+          id: "1",
+          name,
+          email: "a@b.c",
+          username,
+          onboarding: true,
+        });
       },
     );
     When("abro el dashboard {string}", (_ctx, username: string) => openDashboard(username));
     Then("veo el saludo {string}", (_ctx, text: string) => {
       expect(screen.getByRole("heading", { name: text })).toBeInTheDocument();
+    });
+  });
+
+  Scenario("Dashboard muestra la colección del usuario", ({ Given, When, Then, And }) => {
+    Given(
+      "una sesión válida del usuario {string} con username {string}",
+      (_ctx, name: string, username: string) => {
+        vi.mocked(getSession).mockResolvedValue("token");
+        vi.mocked(getMe).mockResolvedValue({
+          id: "1",
+          name,
+          email: "a@b.c",
+          username,
+          onboarding: true,
+        });
+      },
+    );
+    And("el usuario tiene la estampa {string}", (_ctx, stickerName: string) => {
+      vi.mocked(getCollection).mockResolvedValue({
+        ok: true,
+        data: {
+          stickers: [{ id: "aventuras-1", number: 1, name: stickerName, addedAt: "2026-01-01" }],
+        },
+      });
+    });
+    When("abro el dashboard {string}", (_ctx, username: string) => openDashboard(username));
+    Then("veo la estampa {string} en mi colección", (_ctx, stickerName: string) => {
+      expect(screen.getByText(stickerName)).toBeInTheDocument();
     });
   });
 

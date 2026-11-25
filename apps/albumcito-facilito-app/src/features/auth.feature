@@ -21,3 +21,9 @@ Feature: Autenticación
     Given no hay sesión
     When abro el dashboard "ana-perez"
     Then soy redirigido a "/login"
+
+  Scenario: Dashboard muestra la colección del usuario
+    Given una sesión válida del usuario "Ana Pérez" con username "ana-perez"
+    And el usuario tiene la estampa "Cody despierta"
+    When abro el dashboard "ana-perez"
+    Then veo la estampa "Cody despierta" en mi colección

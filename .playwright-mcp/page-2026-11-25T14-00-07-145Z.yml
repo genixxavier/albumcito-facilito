@@ -1,0 +1,14 @@
+- generic [active] [ref=f1e1]:
+  - alert [ref=f1e12]: Hola, ana
+  - main [ref=f1e13]:
+    - heading "Hola, ana" [level=1] [ref=f1e14]
+    - paragraph [ref=f1e15]: ana@example.com
+    - heading "Mi colección" [level=2] [ref=f1e16]
+    - list [ref=f1e17]:
+      - listitem [ref=f1e18]:
+        - generic [ref=f1e19]: "#2"
+        - generic [ref=f1e20]: Cohete de Cody
+    - generic [ref=f1e21]:
+      - link "Ver álbumes" [ref=f1e22] [cursor=pointer]:
+        - /url: /
+      - button "Cerrar sesión" [ref=f1e24]

@@ -17,6 +17,14 @@ export interface AlbumSummary {
   title: string;
   description: string;
   stickerCount: number;
+  likeCount: number;
+}
+
+/** Resultado de dar o quitar like a un álbum. */
+export interface LikeResult {
+  albumId: string;
+  liked: boolean;
+  likeCount: number;
 }
 
 export interface AlbumStickers {

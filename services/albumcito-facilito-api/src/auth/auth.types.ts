@@ -4,6 +4,10 @@ export interface User {
   email: string;
   username: string;
   passwordHash: string;
+  /** ISO 8601; momento de creación de la cuenta. */
+  createdAt: string;
+  /** null = sin onboarding asignado (cuenta previa); false = pendiente; true = añadió su primera estampa. */
+  onboarding: boolean | null;
 }
 
 export type PublicUser = Omit<User, 'passwordHash'>;

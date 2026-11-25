@@ -50,7 +50,7 @@ Las skills `nextjs-best-practices` y `vercel-react-best-practices` no definen re
 - Todo acceso a datos pasa por la API (`services/albumcito-facilito-api/`); no duplicar lógica de negocio en el cliente.
 - Centralizar las llamadas HTTP en un único cliente de API.
 - URL base de la API: variable `API_URL` (solo servidor, por defecto `http://localhost:3000`; ver `.env.example`). El cliente único es `src/lib/api.ts`.
-- Rutas: `/` (lista de álbumes) y `/albums/[id]` (estampas; `loading.tsx`, `not-found.tsx`, y `error.tsx` global).
+- Rutas: `/onboarding` (solo `me.onboarding === false`; tras signup; elegir y añadir la primera estampa, omitible; el resto redirige a su dashboard), `/` (highlights "Estampas top" y "Álbumes más gustados" —ocultos si están vacíos o fallan—, y lista de álbumes; cada tarjeta lleva `LikeButton`, Server Action `toggleLikeAction`, sin sesión redirige a `/login`; con sesión consulta `GET /likes` sin caché) y `/albums/[id]` (estampas; `loading.tsx`, `not-found.tsx`, y `error.tsx` global).
 - Por defecto, Server Components; añade `"use client"` solo donde haga falta interactividad.
 - Importa con el alias `@/…` en vez de rutas relativas largas.
 - Pantallas clave a cubrir: lista de álbumes, detalle de álbum con estampas, marcar/desmarcar estampa, resumen de faltantes.

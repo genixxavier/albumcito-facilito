@@ -21,4 +21,12 @@ export class UsersRepository {
     this.users.set(user.id, user);
     return user;
   }
+
+  update(id: string, changes: Partial<Omit<User, 'id'>>): User | undefined {
+    const user = this.users.get(id);
+    if (!user) return undefined;
+    const updated = { ...user, ...changes };
+    this.users.set(id, updated);
+    return updated;
+  }
 }

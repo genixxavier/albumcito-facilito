@@ -59,4 +59,17 @@ Desde este directorio (o desde la raíz con `pnpm turbo run <tarea> --filter=@al
 
 - `POST /auth/signup|login`, `GET /auth/me` (guard `JwtAuthGuard`, header `Authorization: Bearer`). Passwords con `bcryptjs`; JWT con `@nestjs/jwt`.
 - Env: `JWT_SECRET` (obligatorio; ver `.env.example`). Los vitest configs de bdd/e2e lo fijan a `test-secret`.
+- `User` incluye `createdAt` (ISO) y `onboarding: boolean | null` (`null` = cuenta previa, `false` al signup, `true` con la primera estampa). `/auth/me` lo expone.
+
+## Colección y onboarding (`src/collection/`, `src/onboarding/`)
+
+- `GET /collection` y `POST /collection/stickers` (`{ stickerId }`, responde 200 con la colección; idempotente; 404 si la estampa no existe), ambos con `JwtAuthGuard`. Repositorio en memoria (`userId → stickerId → addedAt`).
+- Primera estampa de un usuario con `onboarding === false` → `onboarding = true` y `EventEmitter2` emite `onboarding.completed` `{ userId, accountCreatedAt, firstStickerAt, durationMs }`; `OnboardingMetricsListener` lo escribe como log JSON. Usuarios con `onboarding === null` no emiten.
+- `@nestjs/event-emitter` (`EventEmitterModule.forRoot()` en `AppModule`).
 - `username` = slug del nombre con sufijo `-2`, `-3`… y slugs reservados (`albums`, `login`, `signup`…): ver `slug.ts`.
+
+## Likes y rankings (`src/likes/`, `src/albums/`, `src/collection/`)
+
+- `PUT`/`DELETE /albums/:id/like` (Bearer, 200, idempotentes; 404 si el álbum no existe) → `{ albumId, liked, likeCount }`. `GET /likes` (Bearer) → `{ albumIds }`. `AlbumSummary` incluye `likeCount`.
+- Públicos: `GET /albums/top` (álbumes con ≥ 1 like, por likes desc, `id` asc) y `GET /stickers/top` (estampas por nº de coleccionistas, con `albumId` y `collectorCount`). `?limit=` 1–20 (por defecto 5; 400 fuera de rango), ver `common/limit.ts`.
+- `LikesModule` es un módulo hoja (solo `LikesRepository` en memoria + `GET /likes`); `AlbumsModule` lo importa y aloja las rutas de like y `top`, así no hay ciclos. BDD en `test/features/likes.feature`.

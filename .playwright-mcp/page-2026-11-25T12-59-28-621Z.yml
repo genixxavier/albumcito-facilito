@@ -1,0 +1,17 @@
+- main [ref=e2]:
+  - heading "Crear cuenta" [level=1] [ref=e3]
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - text: Nombre
+      - textbox "Nombre" [ref=e6]
+    - generic [ref=e7]:
+      - text: Correo
+      - textbox "Correo" [ref=e8]
+    - generic [ref=e9]:
+      - text: Contraseña
+      - textbox "Contraseña" [ref=e10]
+    - button "Registrarme" [ref=e11]
+  - paragraph [ref=e12]:
+    - text: ¿Ya tienes cuenta?
+    - link "Inicia sesión" [ref=e13] [cursor=pointer]:
+      - /url: /login

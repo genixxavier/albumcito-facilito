@@ -1,0 +1,15 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e19] [cursor=pointer]
+  - alert [ref=e23]: Hola, Maria Validacion
+  - main [ref=e100]:
+    - heading "Hola, Maria Validacion" [level=1] [ref=e101]
+    - paragraph [ref=e102]: maria@example.com
+    - heading "Mi colección" [level=2] [ref=e103]
+    - list [ref=e104]:
+      - listitem [ref=e105]:
+        - generic [ref=e106]: "#1"
+        - generic [ref=e107]: Cody despierta
+    - generic [ref=e108]:
+      - link "Ver álbumes" [ref=e109] [cursor=pointer]:
+        - /url: /
+      - button "Cerrar sesión" [ref=e111]

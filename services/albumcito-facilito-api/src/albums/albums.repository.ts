@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { Album } from './album.types.js';
+import type { Album, Sticker } from './album.types.js';
 
 function stickers(prefix: string, names: string[]) {
   return names.map((name, index) => ({
@@ -51,6 +51,19 @@ const ALBUMS: Album[] = [
 export class AlbumsRepository {
   findAll(): Album[] {
     return ALBUMS;
+  }
+
+  findStickerById(stickerId: string): Sticker | undefined {
+    return ALBUMS.flatMap((album) => album.stickers).find(
+      (sticker) => sticker.id === stickerId,
+    );
+  }
+
+  /** Álbum al que pertenece una estampa. */
+  findAlbumIdByStickerId(stickerId: string): string | undefined {
+    return ALBUMS.find((album) =>
+      album.stickers.some((sticker) => sticker.id === stickerId),
+    )?.id;
   }
 
   findById(id: string): Album | undefined {

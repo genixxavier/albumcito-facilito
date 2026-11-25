@@ -32,6 +32,8 @@ export class AuthService {
       email,
       username: uniqueSlug(dto.name, (s) => this.users.usernameExists(s)),
       passwordHash: await bcrypt.hash(dto.password, 10),
+      createdAt: new Date().toISOString(),
+      onboarding: false,
     });
     return this.issue(user);
   }

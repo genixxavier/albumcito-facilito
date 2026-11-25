@@ -3,17 +3,17 @@ Feature: Registro e inicio de sesión
   Quiero registrarme e iniciar sesión en el navegador
   Para llegar a mi dashboard personal
 
-  Scenario: Registro exitoso redirige al dashboard
+  Scenario: Registro exitoso lleva al onboarding
     Given estoy en la página "/signup"
     When me registro con nombre "Ana Pérez", correo "ana@example.com" y contraseña "secreto123"
-    Then soy redirigido a "/ana-perez"
-    And veo el saludo "Hola, Ana Pérez"
+    Then soy redirigido a "/onboarding"
+    And veo el encabezado "Elige tu primera estampa"
 
   Scenario: Dos usuarios con el mismo nombre reciben usernames distintos
     Given existe un usuario "Carla Ruiz" con correo "carla@example.com"
     And estoy en la página "/signup"
     When me registro con nombre "Carla Ruiz", correo "carla2@example.com" y contraseña "secreto123"
-    Then soy redirigido a "/carla-ruiz-2"
+    Then soy redirigido a "/onboarding"
 
   Scenario: Registro con correo duplicado muestra un error
     Given existe un usuario "Beto Díaz" con correo "beto@example.com"

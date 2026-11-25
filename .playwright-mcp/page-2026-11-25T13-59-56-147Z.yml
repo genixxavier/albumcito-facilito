@@ -1,0 +1,16 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e34]
+  - main [ref=e35]:
+    - heading "Iniciar sesión" [level=1] [ref=e36]
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - text: Correo
+        - textbox "Correo" [ref=e39]
+      - generic [ref=e40]:
+        - text: Contraseña
+        - textbox "Contraseña" [ref=e41]
+      - button "Entrar" [ref=e42]
+    - paragraph [ref=e43]:
+      - text: ¿No tienes cuenta?
+      - link "Regístrate" [ref=e44] [cursor=pointer]:
+        - /url: /signup
