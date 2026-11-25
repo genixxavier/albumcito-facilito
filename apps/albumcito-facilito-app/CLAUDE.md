@@ -51,6 +51,7 @@ Las skills `nextjs-best-practices` y `vercel-react-best-practices` no definen re
 - Centralizar las llamadas HTTP en un único cliente de API.
 - URL base de la API: variable `API_URL` (solo servidor, por defecto `http://localhost:3000`; ver `.env.example`). El cliente único es `src/lib/api.ts`.
 - Rutas: `/onboarding` (solo `me.onboarding === false`; tras signup; elegir y añadir la primera estampa, omitible; el resto redirige a su dashboard), `/` (highlights "Estampas top" y "Álbumes más gustados" —ocultos si están vacíos o fallan—, y lista de álbumes; cada tarjeta lleva `LikeButton`, Server Action `toggleLikeAction`, sin sesión redirige a `/login`; con sesión consulta `GET /likes` sin caché) y `/albums/[id]` (estampas; `loading.tsx`, `not-found.tsx`, y `error.tsx` global).
+- Compartir (`ShareButton`, `src/components/share-button.tsx`; enlaces en `src/lib/share.ts`): botón en cada tarjeta de álbum (home), en el detalle del álbum y en cada estampa (`/albums/<id>#sticker-<id>`). Abre un `<dialog>` modal con Facebook, X, WhatsApp, Telegram, correo, copiar enlace y Web Share API si existe. La URL absoluta se calcula en el cliente con `window.location.origin`. Facebook no previsualiza URLs de `localhost`. Spec en `openspec/changes/share-albums-stickers/`.
 - Por defecto, Server Components; añade `"use client"` solo donde haga falta interactividad.
 - Importa con el alias `@/…` en vez de rutas relativas largas.
 - Pantallas clave a cubrir: lista de álbumes, detalle de álbum con estampas, marcar/desmarcar estampa, resumen de faltantes.

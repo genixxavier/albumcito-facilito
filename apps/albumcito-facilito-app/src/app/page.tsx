@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { LikeButton } from "@/components/like-button";
+import { ShareButton } from "@/components/share-button";
+import { sharePath } from "@/lib/share";
 import {
   getAlbums,
   getMyLikes,
@@ -28,8 +30,9 @@ function AlbumCard({ album, liked }: { album: AlbumSummary; liked: boolean }) {
           {album.stickerCount} estampas
         </span>
       </Link>
-      <div className="mt-3">
+      <div className="mt-3 flex items-center gap-2">
         <LikeButton albumId={album.id} likeCount={album.likeCount} liked={liked} />
+        <ShareButton title={album.title} path={sharePath(album.id)} />
       </div>
     </li>
   );
