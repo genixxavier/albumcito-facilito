@@ -1,6 +1,6 @@
 "use client";
 
-import { useOptimistic } from "react";
+import { useOptimistic, useState } from "react";
 import { toggleLikeAction } from "@/app/actions";
 
 interface Props {
@@ -12,6 +12,8 @@ interface Props {
 /** Botón de "me gusta" con actualización optimista; sin sesión la acción redirige a `/login`. */
 export function LikeButton({ albumId, likeCount, liked }: Props) {
   const [state, setOptimistic] = useOptimistic({ liked, likeCount }, (_prev, next: Props) => next);
+  // El "pop" solo se dispara al dar like (no al cargar la página con like previo).
+  const [pop, setPop] = useState(false);
 
   async function submit(data: FormData) {
     setOptimistic({
@@ -28,15 +30,24 @@ export function LikeButton({ albumId, likeCount, liked }: Props) {
       <input type="hidden" name="like" value={String(!liked)} />
       <button
         type="submit"
+        // Fuera de la acción: el estado dentro de una transición async no se pinta hasta que termina.
+        onClick={() => setPop(!state.liked)}
         aria-pressed={state.liked}
         aria-label={state.liked ? "Quitar me gusta" : "Me gusta"}
-        className={`rounded-full border px-3 py-1 text-sm font-medium transition ${
+        className={`rounded-full border px-3 py-1 text-sm font-medium transition duration-200 motion-safe:active:scale-95 ${
           state.liked
             ? "border-pink-500 bg-pink-50 text-pink-600"
             : "border-gray-300 text-gray-600 hover:border-pink-400"
         }`}
       >
-        <span aria-hidden="true">{state.liked ? "♥" : "♡"}</span> {state.likeCount}
+        <span
+          aria-hidden="true"
+          onAnimationEnd={() => setPop(false)}
+          className={`inline-block ${pop && state.liked ? "motion-safe:animate-like-pop" : ""}`}
+        >
+          {state.liked ? "♥" : "♡"}
+        </span>{" "}
+        {state.likeCount}
       </button>
     </form>
   );

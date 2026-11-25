@@ -51,6 +51,8 @@ Las skills `nextjs-best-practices` y `vercel-react-best-practices` no definen re
 - Centralizar las llamadas HTTP en un único cliente de API.
 - URL base de la API: variable `API_URL` (solo servidor, por defecto `http://localhost:3000`; ver `.env.example`). El cliente único es `src/lib/api.ts`.
 - Rutas: `/onboarding` (solo `me.onboarding === false`; tras signup; elegir y añadir la primera estampa, omitible; el resto redirige a su dashboard), `/` (highlights "Estampas top" y "Álbumes más gustados" —ocultos si están vacíos o fallan—, y lista de álbumes; cada tarjeta lleva `LikeButton`, Server Action `toggleLikeAction`, sin sesión redirige a `/login`; con sesión consulta `GET /likes` sin caché) y `/albums/[id]` (estampas; `loading.tsx`, `not-found.tsx`, y `error.tsx` global).
+- Micro-animaciones: solo CSS (Tailwind + keyframes/utilidades en `globals.css`, sin librerías). Hover/focus de tarjetas con `motion-safe:`; `LikeButton` hace "pop" del corazón solo al dar like (`animate-like-pop`). Todo respeta `prefers-reduced-motion`.
+- Visor de estampas: `src/components/sticker-grid.tsx` (`"use client"`) renderiza las estampas de `/albums/[id]` y `/[username]` como botones que abren un `<dialog>` nativo (`showModal()`; cierra con botón, Escape o clic en el fondo, con animación de salida vía `data-closing` y devolviendo el foco). `/onboarding` no lo usa (el clic añade la estampa). jsdom no implementa `showModal/close`: se emulan en `src/test/setup.ts`.
 - Por defecto, Server Components; añade `"use client"` solo donde haga falta interactividad.
 - Importa con el alias `@/…` en vez de rutas relativas largas.
 - Pantallas clave a cubrir: lista de álbumes, detalle de álbum con estampas, marcar/desmarcar estampa, resumen de faltantes.

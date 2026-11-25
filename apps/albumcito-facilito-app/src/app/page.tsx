@@ -20,7 +20,7 @@ async function orFallback<T>(promise: Promise<T>, fallback: T): Promise<T> {
 
 function AlbumCard({ album, liked }: { album: AlbumSummary; liked: boolean }) {
   return (
-    <li className="flex h-full flex-col rounded-xl border border-gray-200 p-5 transition hover:border-indigo-500 hover:shadow-md">
+    <li className="flex h-full flex-col rounded-xl border border-gray-200 p-5 transition duration-200 hover:border-indigo-500 hover:shadow-md focus-within:border-indigo-500 focus-within:shadow-md motion-safe:hover:-translate-y-1 motion-safe:hover:scale-[1.02] motion-safe:focus-within:-translate-y-1">
       <Link href={`/albums/${album.id}`} className="block flex-1">
         <span className="block text-lg font-semibold">{album.title}</span>
         <span className="mt-1 block text-sm text-gray-600">{album.description}</span>
@@ -61,7 +61,10 @@ export default async function Home() {
           </h2>
           <ol aria-label="Estampas top" className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topStickers.map((sticker) => (
-              <li key={sticker.id} className="rounded-xl border border-gray-200 p-4">
+              <li
+                key={sticker.id}
+                className="rounded-xl border border-gray-200 p-4 transition duration-200 hover:border-indigo-500 hover:shadow-md focus-within:border-indigo-500 focus-within:shadow-md motion-safe:hover:-translate-y-1 motion-safe:hover:scale-[1.02] motion-safe:focus-within:-translate-y-1"
+              >
                 <Link href={`/albums/${sticker.albumId}`} className="block">
                   <span className="block font-medium">{sticker.name}</span>
                   <span className="mt-1 block text-sm text-gray-600">
