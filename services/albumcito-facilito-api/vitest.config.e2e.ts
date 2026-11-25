@@ -4,6 +4,7 @@ export default defineConfig({
   resolve: { tsconfigPaths: true },
   test: {
     globals: true,
+    env: { JWT_SECRET: 'test-secret' },
     root: './',
     include: ['**/*.e2e-spec.ts'],
   },

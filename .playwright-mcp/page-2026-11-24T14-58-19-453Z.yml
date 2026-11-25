@@ -1,0 +1,18 @@
+- generic [ref=f2e1]:
+  - main [ref=f2e2]:
+    - heading "Iniciar sesión" [level=1] [ref=f2e3]
+    - generic [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - text: Correo
+        - textbox "Correo" [active] [ref=f2e6]
+      - generic [ref=f2e7]:
+        - text: Contraseña
+        - textbox "Contraseña" [ref=f2e8]: secreto123
+      - alert [ref=f2e22]: Credenciales inválidas
+      - button "Entrar" [ref=f2e9]
+    - paragraph [ref=f2e10]:
+      - text: ¿No tienes cuenta?
+      - link "Regístrate" [ref=f2e11] [cursor=pointer]:
+        - /url: /signup
+  - button "Open Next.js Dev Tools" [ref=f2e17] [cursor=pointer]
+  - alert [ref=f2e21]

@@ -8,6 +8,7 @@
     "lint": { "dependsOn": ["^lint"] },
     "check-types": { "dependsOn": ["^check-types"] },
     "test": { "dependsOn": ["^build"] },
+    "test:e2e": { "cache": false },
     "dev": { "cache": false, "persistent": true }
   }
 }

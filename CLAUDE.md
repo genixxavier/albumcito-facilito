@@ -16,7 +16,7 @@ Cada componente tiene su propio `CLAUDE.md` con comandos y convenciones; consúl
 ## API backend (`services/albumcito-facilito-api`)
 
 - Paquete `@albumcito/api`: NestJS 12 + TypeScript (ESM, Express 5), tests con Vitest, lint con oxlint, formato con Prettier.
-- Estado: solo setup base (`GET /` responde "Hello World!"); sin dominio, base de datos ni auth todavía.
+- Estado: solo setup base (`GET /` responde "Hello World!"); módulo `auth` (signup/login/me con JWT, usuarios in-memory); sin base de datos todavía.
 - Puerto por defecto 3000 (variable `PORT`).
 - Comandos y convenciones: ver `services/albumcito-facilito-api/CLAUDE.md`.
 - Tareas desde la raíz: `pnpm turbo run build|lint|test --filter=@albumcito/api`.
@@ -34,7 +34,8 @@ Cada componente tiene su propio `CLAUDE.md` con comandos y convenciones; consúl
 - El frontend es el único cliente de la API y se comunica con ella por HTTP.
 - La API es la fuente de verdad del estado de la colección; el frontend no persiste datos propios más allá de caché/UI.
 - Conceptos de dominio compartidos: **álbum**, **estampa**, **usuario**, **colección** (estampas que un usuario posee).
-- TODO: protocolo (REST/GraphQL), autenticación, variable de entorno con la URL base de la API.
+- Protocolo REST/JSON. URL base de la API: `API_URL` (app, solo servidor).
+- Auth: `POST /auth/signup` (name, email, password), `POST /auth/login`, `GET /auth/me` (Bearer). La API firma un JWT (1h, `JWT_SECRET` obligatorio); el frontend lo guarda en cookie httpOnly `session` mediante Server Actions. Tras login/signup se redirige a `/<username>` (slug único derivado del nombre).
 
 ## Estructura del repositorio
 

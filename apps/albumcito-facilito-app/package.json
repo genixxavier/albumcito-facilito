@@ -8,6 +8,8 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@amiceli/vitest-cucumber": "^7.0.0",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.5",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^8.0.0",
@@ -19,6 +21,7 @@
     "eslint": "^10.15.0",
     "eslint-config-next": "^16.4.6",
     "jsdom": "^31.0.1",
+    "playwright-bdd": "^9.2.1",
     "postcss": "^8.5.33",
     "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3",
@@ -31,6 +34,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test:bdd": "vitest run src/features",
+    "test:e2e": "bddgen && playwright test"
   }
 }
